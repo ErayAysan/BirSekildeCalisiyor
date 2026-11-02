@@ -218,3 +218,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+dbt/**/target/
+dbt/**/logs/
+dbt/**/dbt_packages/
+
+
+*.duckdb
+*.duckdb.wal
+
+
+.venv/
+venv/
+.env
+.DS_Store
+~$*.xlsx
+
+.streamlit/secrets.toml
