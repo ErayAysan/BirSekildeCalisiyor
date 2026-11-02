@@ -4,7 +4,7 @@ YBS305 İş Zekâsı ve Veri Madenciliği dönem projesi: Seattle Airbnb verisiy
 
 ## Ekip
 
--Eray Aysan 030424046 - Rol1
+-Eray Aysan - 030424046 - Rol1
 -Rauf Hakan Gençeli - 030424013 - Rol2
 -Zeynep Sude Çengel - 030424012 - Rol3
 -Suden Eraslan -030424026 - Rol4
