@@ -2,7 +2,7 @@
 YBS305 İş Zekâsı ve Veri Madenciliği dönem projesi: Seattle Airbnb verisiyle dbt ETL, Power BI dashboard ve fiyat tahmin modeli.
 ## Ekip
 -Eray Aysan 030424046 - Rol1
--Rauf Hakan Gençeli 030424013 - Rol2
+-Rauf Hakan Gençeli - 030424013 - Rol2
 -Zeynep Sude Çengel 030424012 - Rol3
 -Suden Eraslan 030424026 - Rol4
 
