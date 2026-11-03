@@ -11,7 +11,7 @@ YBS305 İş Zekâsı ve Veri Madenciliği dönem projesi: Seattle Airbnb verisiy
 
 ## Problem
 
-(Belirlenecek)
+- Seattle’da bir Airbnb ilanının gecelik fiyatını ve doluluğunu hangi faktörler belirliyor; ev sahibi ilanını nasıl fiyatlandırmalı?
 
 ## Veri Kaynakları
 
