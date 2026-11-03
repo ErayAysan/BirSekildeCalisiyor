@@ -236,3 +236,4 @@ venv/
 ~$*.xlsx
 
 .streamlit/secrets.toml
+.user.yml
