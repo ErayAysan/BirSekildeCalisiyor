@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_ev_sahibi
+    description: >
+      Ev sahibi boyut tablosu. Her satır bir ev sahibi.
+      stg_ilanlar'daki ilanlar ev_sahibi_id'ye göre gruplanarak oluşturulur.
+      Deneyim yılı, verinin takvim başlangıcına (2016-01-04) göre hesaplanır.
+    columns:
+      - name: ev_sahibi_id
+        description: "Ev sahibinin anonim kimliği (birincil anahtar)"
+        data_tests:
+          - unique
+          - not_null
+      - name: deneyim_yili
+        description: "Ev sahipliğine başladığı tarihten 2016-01-04'e kadar geçen yıl"
+      - name: yanit_suresi
+        description: "Misafir mesajlarına yanıt süresi kategorisi"
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['1 saat içinde', 'Birkaç saat içinde', '1 gün içinde', 'Birkaç gün veya daha fazla']
+      - name: platform_ilan_sayisi
+        description: "Ev sahibinin Airbnb genelindeki toplam ilan sayısı"
+      - name: seattle_ilan_sayisi
+        description: "Ev sahibinin bu veri setindeki (Seattle) ilan sayısı"
+      - name: profesyonel_ev_sahibi
+        description: "Seattle'da birden fazla ilanı varsa true"
