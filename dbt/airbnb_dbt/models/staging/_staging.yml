@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_ilanlar
+    description: >
+      Temizlenmiş ilan tablosu. Her satır bir Airbnb ilanı.
+      Ev sahibi adı KVKK gereği çıkarılmıştır.
+    columns:
+      - name: ilan_id
+        description: "İlanın benzersiz kimliği"
+        data_tests:
+          - unique
+          - not_null
+      - name: gecelik_fiyat_usd
+        description: "İlanın gecelik fiyatı (USD)"
+        data_tests:
+          - not_null
+      - name: oda_tipi
+        description: "Kiralanan alanın tipi"
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Tüm ev/daire', 'Özel oda', 'Paylaşılan oda']
+      - name: iptal_politikasi
+        description: "İptal politikasının katılığı"
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Katı', 'Orta', 'Esnek']
+      - name: ev_sahibi_id
+        description: "Ev sahibinin anonim kimliği"
+        data_tests:
+          - not_null
+      - name: temizlik_ucreti_usd
+        description: "Temizlik ücreti (USD); ücret alınmayan ilanlarda 0"
+      - name: doluluk_orani_yuzde
+        description: "Takvim dönemindeki rezervasyona kapalı gün yüzdesi (0–100)"
+      - name: genel_puan_100
+        description: "100 üzerinden genel puan; yorum almamış ilanlarda boş"
