@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: external
+    description: "Dış veri kaynakları (data/external klasörü)"
+    meta:
+      external_location: "../../data/external/{name}.csv"
+    tables:
+      - name: census_posta_kodu_2016
+        description: >
+          ABD Nüfus Bürosu, 2016 ACS 5 yıllık tahminleri. Seattle posta kodu
+          bölgeleri (ZCTA) için nüfus, medyan hane geliri ve medyan kira.
+          data/fetch_census.py ile Census API'sinden çekilmiştir.
+
+models:
+  - name: stg_census_posta_kodu
+    description: >
+      Temizlenmiş Census verisi. Her satır bir Seattle posta kodu bölgesi.
+      Census'un negatif özel kodları boş değere çevrilmiştir.
+    columns:
+      - name: posta_kodu
+        description: "5 haneli posta kodu (metin); stg_ilanlar ile birleştirme anahtarı"
+        data_tests:
+          - unique
+          - not_null
+      - name: nufus
+        description: "Posta kodu bölgesindeki toplam nüfus"
+        data_tests:
+          - not_null
+      - name: medyan_hane_geliri_usd
+        description: "Medyan yıllık hane geliri (USD); hesaplanamayan bölgelerde boş"
+      - name: medyan_kira_usd
+        description: "Medyan aylık brüt kira (USD); hesaplanamayan bölgelerde boş"
