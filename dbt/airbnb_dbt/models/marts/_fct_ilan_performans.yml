@@ -16,6 +16,10 @@ models:
         description: "İlanın ev sahibi; dim_ev_sahibi tablosuna bağlanır"
         data_tests:
           - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_ev_sahibi')
+                field: ev_sahibi_id
 
       - name: kisi_basi_fiyat_usd
         description: "Gecelik fiyatın kapasiteye bölümü (USD)"
