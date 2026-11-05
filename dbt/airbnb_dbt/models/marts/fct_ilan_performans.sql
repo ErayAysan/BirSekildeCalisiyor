@@ -17,9 +17,10 @@ select
     gecelik_fiyat_usd,
     temizlik_ucreti_usd,
     min_gece,
-    round(gecelik_fiyat_usd / kapasite, 2) as kisi_basi_fiyat_usd,
-    gecelik_fiyat_usd * min_gece + temizlik_ucreti_usd as min_konaklama_maliyeti_usd,
+    round(gecelik_fiyat_usd / nullif(kapasite, 0), 2) as kisi_basi_fiyat_usd,
+    gecelik_fiyat_usd * min_gece + coalesce(temizlik_ucreti_usd, 0) as min_konaklama_maliyeti_usd,
     case
+        when gecelik_fiyat_usd is null then 'Bilinmiyor'
         when gecelik_fiyat_usd < 85 then 'Ekonomik'
         when gecelik_fiyat_usd < 130 then 'Orta'
         else 'Lüks'
