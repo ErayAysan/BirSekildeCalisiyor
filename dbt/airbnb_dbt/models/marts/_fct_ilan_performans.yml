@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: fct_ilan_performans
+    description: >
+      İlan performans olgu tablosu. Her satır bir ilan.
+      Fiyat, doluluk ve gelir metrikleri stg_ilanlar'dan hesaplanır.
+    columns:
+      - name: ilan_id
+        description: "İlanın benzersiz kimliği (birincil anahtar)"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: ev_sahibi_id
+        description: "İlanın ev sahibi; dim_ev_sahibi tablosuna bağlanır"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_ev_sahibi')
+                field: ev_sahibi_id
+
+      - name: kisi_basi_fiyat_usd
+        description: "Gecelik fiyatın kapasiteye bölümü (USD)"
+
+      - name: min_konaklama_maliyeti_usd
+        description: "Minimum gece sayısı kadar konaklamanın toplam maliyeti, temizlik dahil (USD)"
+
+      - name: fiyat_segmenti
+        description: "Gecelik fiyata göre segment; sınırlar verideki fiyatların üçte birlik dilimlerinden (85 ve 130 USD) belirlendi"
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["Ekonomik", "Orta", "Lüks"]
+
+      - name: takvim_tamamen_kapali
+        description: "Takvim döneminin tamamında rezervasyona kapalıysa true; büyük ihtimalle pasif ilan"
+
+      - name: tahmini_yillik_gelir_usd
+        description: >
+          Dolu gün × takvim ortalama fiyatı (USD). Üst sınır tahminidir:
+          'dolu' günler ev sahibinin kendi kapattığı günleri de içerir.
