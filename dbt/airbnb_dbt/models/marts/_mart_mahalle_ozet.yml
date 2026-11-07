@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: mart_mahalle_ozet
+    description: >
+      Mahalle grubu özet tablosu. Her satır bir mahalle grubu.
+      stg_ilanlar, stg_census_posta_kodu ile posta kodu üzerinden left join ile
+      birleştirilir. Bölge geliri ve kirası ilan ağırlıklı ortalamadır.
+      Doluluk ortalaması takvimi tamamen kapalı ilanları içermez.
+    columns:
+      - name: mahalle_grubu
+        description: "Mahalle grubu adı (birincil anahtar)"
+        data_tests:
+          - unique
+          - not_null
+      - name: ilan_sayisi
+        description: "Mahalle grubundaki ilan sayısı"
+        data_tests:
+          - not_null
+      - name: medyan_gecelik_fiyat_usd
+        description: "Gecelik fiyatın medyanı (USD); aykırı değerlerden etkilenmez"
+      - name: bolge_medyan_geliri_usd
+        description: "İlanların posta kodlarının Census medyan hane gelirlerinin ilan ağırlıklı ortalaması (USD/yıl)"
+      - name: airbnb_kira_orani
+        description: "Ortalama gecelik fiyat × 30 / bölge medyan aylık kirası; tam dolu ay varsayan üst sınır"
+      - name: konum
+        description: "Harita için 'enlem,boylam' metni"
