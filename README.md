@@ -98,3 +98,13 @@ Ham Airbnb verisini temizleyen staging modeli; diğer bütün modellerin temeli.
 
 - Veri 2016 yılına aittir; bulgular bugünkü Seattle pazarını birebir yansıtmayabilir.
 - (Herkes kendi modeliyle ilgili maddeyi ekler.)
+- ### 👤 Boyut Tablosu: `dim_ev_sahibi` (Geliştirici: Hakan)
+Bu tablo, Airbnb veri setindeki ev sahiplerine (host) ait temel özellikleri ve güvenilirlik metriklerini tekilleştirilmiş bir yapıda tutar.
+
+**Temel Özellikler:**
+* **SCD Type 1 Yaklaşımı:** Her ev sahibi (`ev_sahibi_id`) tabloda tek bir satırda temsil edilir (Unique grain).
+* **Temizlenen Veriler:** İsimlerdeki format hataları giderilmiş, `null` olan superhost ve kimlik doğrulama bilgileri standart boolean (`true/false`) değerlere dönüştürülmüştür.
+* **Test & Kalite:** `ev_sahibi_id` üzerinde dbt `unique` ve `not_null` testleri uygulanarak veri bütünlüğü güvence altına alınmıştır. Ayrıca boolean alanlar için `accepted_values` testleri yazılmıştır.
+
+**Kullanım Amacı:** 
+Olgu (Fact) tablosu olan `fct_ilan_performans` ile birleştirilerek; "Süper ev sahiplerinin ortalama geliri nedir?" veya "Kimliği doğrulanmış ev sahiplerinin doluluk oranları daha mı yüksektir?" gibi iş sorularına yanıt bulmak için tasarlanmıştır.
