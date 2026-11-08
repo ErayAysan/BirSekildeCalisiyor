@@ -21,23 +21,71 @@ models:
                 to: ref('dim_ev_sahibi')
                 field: ev_sahibi_id
 
+      - name: mahalle
+        description: "İlanın bulunduğu mahalle"
+
+      - name: mahalle_grubu
+        description: "İlanın bağlı olduğu daha geniş mahalle grubu"
+
+      - name: posta_kodu
+        description: "İlanın posta kodu (metin; Census ile birleştirmek için). Bazı ilanlarda boş"
+
+      - name: oda_tipi
+        description: "Kiralanan alanın türü: Tüm ev/daire, Özel oda veya Paylaşılan oda"
+
+      - name: mulk_tipi
+        description: "Mülk türü"
+
+      - name: kapasite
+        description: "İlanın ağırlayabileceği en fazla misafir sayısı"
+
+      - name: yatak_odasi_sayisi
+        description: "İlandaki yatak odası sayısı"
+
+      - name: iptal_politikasi
+        description: "İlanın iptal politikası: Esnek, Orta veya Katı"
+
+      - name: gecelik_fiyat_usd
+        description: "Gecelik fiyat (USD)"
+
+      - name: temizlik_ucreti_usd
+        description: "Konaklama başına tek seferlik temizlik ücreti (USD). Kaynakta boş olan değerler staging'de 0 yapılır"
+
+      - name: min_gece
+        description: "İlanın kabul ettiği en az gece sayısı"
+
       - name: kisi_basi_fiyat_usd
-        description: "Gecelik fiyatın kapasiteye bölümü (USD)"
+        description: "Gecelik fiyatın kapasiteye bölümü, 2 ondalığa yuvarlanmış (USD). Kapasite 0 ya da boşsa boş"
 
       - name: min_konaklama_maliyeti_usd
-        description: "Minimum gece sayısı kadar konaklamanın toplam maliyeti, temizlik dahil (USD)"
+        description: "Gecelik fiyat × minimum gece sayısı + temizlik ücreti (USD)"
 
       - name: fiyat_segmenti
-        description: "Gecelik fiyata göre segment; sınırlar verideki fiyatların üçte birlik dilimlerinden (85 ve 130 USD) belirlendi"
+        description: "Gecelik fiyata göre segment: 85 USD altı Ekonomik, 85–129 Orta, 130 ve üzeri Lüks; fiyat boşsa Bilinmiyor. Sınırlar fiyatların üçte birlik dilimlerinden belirlendi"
         data_tests:
           - accepted_values:
               arguments:
                 values: ["Ekonomik", "Orta", "Lüks", "Bilinmiyor"]
 
+      - name: doluluk_orani_yuzde
+        description: "365 günlük takvim döneminde dolu günlerin yüzdesi"
+
+      - name: dolu_gun
+        description: "365 günlük takvim döneminde müsait olmayan gün sayısı; rezerve edilmiş günler ile ev sahibinin kapattığı günleri içerir"
+
       - name: takvim_tamamen_kapali
-        description: "Takvim döneminin tamamında rezervasyona kapalıysa true; büyük ihtimalle pasif ilan"
+        description: "Dolu gün sayısı takvimdeki toplam gün sayısına eşitse true; büyük ihtimalle pasif ilan"
 
       - name: tahmini_yillik_gelir_usd
         description: >
-          Dolu gün × takvim ortalama fiyatı (USD). Üst sınır tahminidir:
-          'dolu' günler ev sahibinin kendi kapattığı günleri de içerir.
+          Dolu gün × takvim ortalama fiyatı (USD); takvim fiyatı yoksa gecelik fiyat kullanılır.
+          Üst sınır tahminidir: 'dolu' günler ev sahibinin kendi kapattığı günleri de içerir.
+
+      - name: genel_puan_100
+        description: "İlanın genel değerlendirme puanı (100 üzerinden); puanı olmayan ilanlarda boş"
+
+      - name: yorum_sayisi
+        description: "İlanın aldığı yorum sayısı"
+
+      - name: puani_var
+        description: "genel_puan_100 boş değilse true"
