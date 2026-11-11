@@ -7,6 +7,7 @@ CIKTI_KLASORU = Path("../../dashboard/data")
 TABLOLAR = [
     "dim_ev_sahibi",
     "fct_ilan_performans",
+    "mart_mahalle_ozet",
 ]
 
 CIKTI_KLASORU.mkdir(parents=True, exist_ok=True)
