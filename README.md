@@ -68,11 +68,17 @@ Ham Airbnb verisini temizleyen staging modeli; diğer bütün modellerin temeli.
 
 ## Dashboard
 
-(Araç, gerekçe ve link eklenecek)
+Dashboard Looker Studio ile hazırlanmıştır: [Raporu aç](https://datastudio.google.com/reporting/2911ddab-7347-4d60-aaf0-a388113ee94d)
+
+Ekipte Mac kullanan üye olduğu ve Power BI Desktop yalnızca Windows'ta çalıştığı için, el kitabının izin verdiği alternatif olan Looker Studio tercih edildi. Tarayıcı tabanlı olması dört üyenin aynı rapor üzerinde eşzamanlı çalışmasını sağladı.
+
+Rapor dört sayfadan oluşur. Üstteki mahalle grubu, oda tipi ve mülk tipi filtreleri tüm sayfalarda geçerlidir.
 
 ### Genel Bakış (Eray)
 
-(Sayfa bitince doldurulacak)
+![Genel Bakış](dashboard/ekran_goruntuleri/genel_bakis.png)
+
+Seattle'da 3.818 ilanın ortalama gecelik fiyatı 127,98 USD, kişi başına 41,27 USD. Aktif ilanların ortalama doluluğu %31,23, ortalama puanı 100 üzerinden 94,54. İlanlar en çok Capitol Hill ve Downtown mahalle gruplarında yoğunlaşıyor. Tüm ev/daire ilanları özel odalardan belirgin şekilde daha pahalı.
 
 ### Ev Sahibi Analizi (Hakan)
 
@@ -92,7 +98,34 @@ Ham Airbnb verisini temizleyen staging modeli; diğer bütün modellerin temeli.
 
 ## Nasıl Çalıştırılır
 
-(Eray dolduracak)
+**Gereksinimler:** Python 3.10–3.14, Git
+
+**Kurulum:**
+```bash
+git clone https://github.com/ErayAysan/BirSekildeCalisiyor.git
+cd BirSekildeCalisiyor
+python -m venv .venv
+# Windows: .venv\Scripts\Activate.ps1
+# Mac/Linux: source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+**Veri hattını çalıştırma:**
+```bash
+cd dbt/airbnb_dbt
+dbt debug
+dbt build
+```
+
+**Dashboard verisini güncelleme** (dbt/airbnb_dbt klasöründen):
+```bash
+python ../../dashboard/export_marts.py
+```
+Oluşan CSV'ler `dashboard/data/` klasörüne yazılır ve Looker Studio'ya yüklenir.
+
+**Dokümantasyon:** `docs/dbt_docs.html` dosyasını indirip tarayıcıda açın.
+
+**Census verisini yeniden çekme (isteğe bağlı):** census.gov'dan ücretsiz API anahtarı alıp `CENSUS_API_KEY` ortam değişkeni olarak tanımlayın, sonra proje ana klasöründen `python data/fetch_census.py` çalıştırın. CSV repoda hazır olduğu için bu adım zorunlu değildir.
 
 ## Sınırlılıklar
 
