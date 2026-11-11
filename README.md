@@ -108,3 +108,4 @@ Bu tablo, Airbnb veri setindeki ev sahiplerine (host) ait temel özellikleri ve 
 
 **Kullanım Amacı:** 
 Olgu (Fact) tablosu olan `fct_ilan_performans` ile birleştirilerek; "Süper ev sahiplerinin ortalama geliri nedir?" veya "Kimliği doğrulanmış ev sahiplerinin doluluk oranları daha mı yüksektir?" gibi iş sorularına yanıt bulmak için tasarlanmıştır.
+<img width="1658" height="1017" alt="image" src="https://github.com/user-attachments/assets/78855253-aa1c-4108-9dd7-c2a41a69b69e" />
