@@ -82,7 +82,14 @@ Seattle'da 3.818 ilanın ortalama gecelik fiyatı 127,98 USD, kişi başına 41,
 
 ### Ev Sahibi Analizi (Hakan)
 
-(Hakan dolduracak)
+![Ev Sahibi Analizi](dashboard/ekran_goruntuleri/ev_sahibi_analizi.png)
+
+Seattle Airbnb veri setindeki 2.751 ev sahibinin %19,52'si Süper Ev Sahibi, %16,94'ü ise profesyonel ev sahibi statüsündedir. Ev sahiplerinin ortalama deneyim süresi 2,07 yıldır. 
+
+Temel Bulgular:
+* Süper ev sahibi rozetine sahip olan kullanıcıların genel puan ortalamaları, standart ev sahiplerine kıyasla daha yüksektir.
+* Hızlı yanıt, yüksek doluluk getirir: Misafirlerine "1 saat içinde" yanıt veren ev sahiplerinin doluluk oranları, daha geç yanıt verenlere göre belirgin bir şekilde zirvededir.
+* Ev sahiplerinin deneyim yılları ile aldıkları puanlar arasında doğrudan doğrusal (linear) bir ilişki gözlemlenmiştir.
 
 ### Fiyat ve Doluluk Analizi (Suden)
 
