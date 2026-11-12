@@ -4,12 +4,12 @@ YBS305 İş Zekâsı ve Veri Madenciliği dönem projesi: Seattle Airbnb verisiy
 
 ## Ekip ve Görev Dağılımı
 
-| Üye | Veri ve dbt | Dashboard | Dokümantasyon | Bölüm 2 |
-| --- | --- | --- | --- | --- |
-| Eray Aysan (030424046) | Repo ve dbt altyapısı, Excel→CSV script'i, `stg_ilanlar` | Looker raporunun kurulumu, veri aktarım script'i, tema ve filtreler, Genel Bakış sayfası | README iskeleti, Nasıl Çalıştırılır | Streamlit uygulaması, deployment, entegrasyon |
-| Rauf Hakan Gençeli (030424013) | `dim_ev_sahibi` | Ev Sahibi Analizi sayfası | Ev sahibi analizi bölümü | Özellik tablosu, keşifsel analiz |
-| Suden Eraslan (030424026) | `fct_ilan_performans`, `relationships` testi | Fiyat ve Doluluk sayfası | dbt docs, veri sözlüğü | 1. algoritma ve metrikler |
-| Zeynep Sude Çengel (030424012) | Census API verisi, `stg_census_posta_kodu`, `mart_mahalle_ozet` | Mahalle Analizi sayfası | Veri kaynakları | 2. algoritma ve karşılaştırma |
+| Üye                            | Veri ve dbt                                                     | Dashboard                                                                                | Dokümantasyon                       | Bölüm 2                                       |
+| ------------------------------ | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------- |
+| Eray Aysan (030424046)         | Repo ve dbt altyapısı, Excel→CSV script'i, `stg_ilanlar`        | Looker raporunun kurulumu, veri aktarım script'i, tema ve filtreler, Genel Bakış sayfası | README iskeleti, Nasıl Çalıştırılır | Streamlit uygulaması, deployment, entegrasyon |
+| Rauf Hakan Gençeli (030424013) | `dim_ev_sahibi`                                                 | Ev Sahibi Analizi sayfası                                                                | Ev sahibi analizi bölümü            | Özellik tablosu, keşifsel analiz              |
+| Suden Eraslan (030424026)      | `fct_ilan_performans`, `relationships` testi                    | Fiyat ve Doluluk sayfası                                                                 | dbt docs, veri sözlüğü              | 1. algoritma ve metrikler                     |
+| Zeynep Sude Çengel (030424012) | Census API verisi, `stg_census_posta_kodu`, `mart_mahalle_ozet` | Mahalle Analizi sayfası                                                                  | Veri kaynakları                     | 2. algoritma ve karşılaştırma                 |
 
 Her Pull Request başka bir üye tarafından incelenmiştir (inceleme döngüsü: Eray → Hakan → Suden → Zeynep → Eray).
 
@@ -32,6 +32,7 @@ Bu soruyu üç alt soruya ayırdık:
 **Ana veri:** Inside Airbnb – Seattle ilanları (link ve çekilme tarihi eklenecek)
 
 **Dış kaynak:**
+
 - Kaynak: ABD Nüfus Bürosu, American Community Survey (ACS)
 - Veri seti: 2016 ACS 5 yıllık tahminler
 - Erişim: Census API: https://api.census.gov/data/2016/acs/acs5
@@ -60,7 +61,7 @@ Seattle Airbnb veri setindeki ev sahiplerine (host) ait benzersiz (unique) kimli
 
 ### fct_ilan_performans (Suden)
 
-(Suden dolduracak)
+Her satırın bir ilanı temsil ettiği (grain: ilan, 3.818 satır) mart tablosudur. Kişi başı fiyat, minimum konaklama maliyeti, fiyat segmenti ve tahmini yıllık gelir metriklerini hesaplar. Fiyat segmentleri (Ekonomik/Orta/Lüks) sabit sınırlarla değil, fiyat dağılımının üçte birlik dilimleriyle belirlenmiştir. Takvimi tamamen kapalı ilanlar takvim_tamamen_kapali bayrağıyla işaretlenir. Modelde N test vardır; bunlardan relationships testi, her ev_sahibi_id’nin dim_ev_sahibi’de bulunduğunu doğrular.
 
 ### stg_census_posta_kodu ve mart_mahalle_ozet (Zeynep)
 
@@ -86,16 +87,18 @@ Seattle'da 3.818 ilanın ortalama gecelik fiyatı 127,98 USD, kişi başına 41,
 
 ![Ev Sahibi Analizi](dashboard/ekran_goruntuleri/ev_sahibi_analizi.png)
 
-Seattle Airbnb veri setindeki 2.751 ev sahibinin %19,52'si Süper Ev Sahibi, %16,94'ü ise profesyonel ev sahibi statüsündedir. Ev sahiplerinin ortalama deneyim süresi 2,07 yıldır. 
+Seattle Airbnb veri setindeki 2.751 ev sahibinin %19,52'si Süper Ev Sahibi, %16,94'ü ise profesyonel ev sahibi statüsündedir. Ev sahiplerinin ortalama deneyim süresi 2,07 yıldır.
 
 Temel Bulgular:
-* Süper ev sahibi rozetine sahip olan kullanıcıların genel puan ortalamaları, standart ev sahiplerine kıyasla daha yüksektir.
-* Hızlı yanıt, yüksek doluluk getirir: Misafirlerine "1 saat içinde" yanıt veren ev sahiplerinin doluluk oranları, daha geç yanıt verenlere göre belirgin bir şekilde zirvededir.
-* Ev sahiplerinin deneyim yılları ile aldıkları puanlar arasında doğrudan doğrusal (linear) bir ilişki gözlemlenmiştir.
+
+- Süper ev sahibi rozetine sahip olan kullanıcıların genel puan ortalamaları, standart ev sahiplerine kıyasla daha yüksektir.
+- Hızlı yanıt, yüksek doluluk getirir: Misafirlerine "1 saat içinde" yanıt veren ev sahiplerinin doluluk oranları, daha geç yanıt verenlere göre belirgin bir şekilde zirvededir.
+- Ev sahiplerinin deneyim yılları ile aldıkları puanlar arasında doğrudan doğrusal (linear) bir ilişki gözlemlenmiştir.
 
 ### Fiyat ve Doluluk Analizi (Suden)
 
-(Suden dolduracak)
+Tüm ev/daire ilanlarının ortalama gecelik fiyatı (155 USD) özel odaların yaklaşık iki katı (75 USD); ancak kişi başı fiyatta fark neredeyse kapanıyor (42 USD'ye karşı 40 USD). Doluluk tüm ev/dairelerde en yüksek (%34,0), onu özel odalar (%26,5) ve paylaşılan odalar (%18,6) izliyor. Katı iptal politikalı ilanların ortalama doluluğu (%28,4), esnek ve orta politikalı ilanların (her ikisi %32,9) yaklaşık 4,5 puan altında. Rakamlar, pasif ilanlar (takvimi tamamen kapalı 95 ilan) hariç 3.723 ilan üzerinden hesaplanmıştır ve nedensellik değil ilişki gösterir.
+![Fiyat ve Doluluk sayfası](dashboard/ekran_goruntuleri/fiyat_ve_doluluk.png)
 
 ### Mahalle Analizi (Zeynep)
 
@@ -103,13 +106,19 @@ Medyan gecelik fiyatı en yüksek mahalle grupları Downtown (139 USD), Magnolia
 
 ## Veri Sözlüğü ve dbt Docs
 
-(Suden dolduracak)
+Projenin dokümantasyonu iki dosyadan oluşur:
+
+- **`docs/dbt_docs.html`**: dbt'nin koddan otomatik ürettiği etkileşimli dokümantasyon. Modellerin açıklamalarını, sütun tiplerini, testlerini ve veri akış (lineage) diyagramını içerir. Dosyayı indirip tarayıcıda çift tıklayarak açabilirsiniz; internet bağlantısı ya da sunucu gerekmez.
+- **`docs/veri_sozlugu.md`**: Tabloların sütun adlarını, tiplerini ve anlamlarını gösteren okunabilir özet. Her tablonun başında grain'i (her satırın neyi temsil ettiği) ve sahibi yazılıdır.
+
+Modeller değiştiğinde dokümantasyonu yenilemek için `dbt/airbnb_dbt` klasöründe `dbt docs generate --static` komutu çalıştırılır; oluşan `target/static_index.html` dosyası `docs/dbt_docs.html` olarak kopyalanır.
 
 ## Nasıl Çalıştırılır
 
 **Gereksinimler:** Python 3.10–3.14, Git
 
 **Kurulum:**
+
 ```bash
 git clone https://github.com/ErayAysan/BirSekildeCalisiyor.git
 cd BirSekildeCalisiyor
@@ -120,6 +129,7 @@ python -m pip install -r requirements.txt
 ```
 
 **Veri hattını çalıştırma:**
+
 ```bash
 cd dbt/airbnb_dbt
 dbt debug
@@ -127,9 +137,11 @@ dbt build
 ```
 
 **Dashboard verisini güncelleme** (dbt/airbnb_dbt klasöründen):
+
 ```bash
 python ../../dashboard/export_marts.py
 ```
+
 Oluşan CSV'ler `dashboard/data/` klasörüne yazılır ve Looker Studio'ya yüklenir.
 
 **Dokümantasyon:** `docs/dbt_docs.html` dosyasını indirip tarayıcıda açın.
@@ -144,14 +156,16 @@ Oluşan CSV'ler `dashboard/data/` klasörüne yazılır ve Looker Studio'ya yük
 Bu tablo, Airbnb veri setindeki ev sahiplerine (host) ait temel özellikleri ve güvenilirlik metriklerini tekilleştirilmiş bir yapıda tutar.
 
 **Temel Özellikler:**
-* **SCD Type 1 Yaklaşımı:** Her ev sahibi (`ev_sahibi_id`) tabloda tek bir satırda temsil edilir (Unique grain).
-* **Temizlenen Veriler:** İsimlerdeki format hataları giderilmiş, `null` olan superhost ve kimlik doğrulama bilgileri standart boolean (`true/false`) değerlere dönüştürülmüştür.
-* **Test & Kalite:** `ev_sahibi_id` üzerinde dbt `unique` ve `not_null` testleri uygulanarak veri bütünlüğü güvence altına alınmıştır. Ayrıca boolean alanlar için `accepted_values` testleri yazılmıştır.
 
-**Kullanım Amacı:** 
+- **SCD Type 1 Yaklaşımı:** Her ev sahibi (`ev_sahibi_id`) tabloda tek bir satırda temsil edilir (Unique grain).
+- **Temizlenen Veriler:** İsimlerdeki format hataları giderilmiş, `null` olan superhost ve kimlik doğrulama bilgileri standart boolean (`true/false`) değerlere dönüştürülmüştür.
+- **Test & Kalite:** `ev_sahibi_id` üzerinde dbt `unique` ve `not_null` testleri uygulanarak veri bütünlüğü güvence altına alınmıştır. Ayrıca boolean alanlar için `accepted_values` testleri yazılmıştır.
+
+**Kullanım Amacı:**
 Olgu (Fact) tablosu olan `fct_ilan_performans` ile birleştirilerek; "Süper ev sahiplerinin ortalama geliri nedir?" veya "Kimliği doğrulanmış ev sahiplerinin doluluk oranları daha mı yüksektir?" gibi iş sorularına yanıt bulmak için tasarlanmıştır.
 
 ### Mahalle Analizi (Geliştirici: Zeynep)
+
 - Census verisi 2016 ACS 5 yıllık tahminidir, 2012–2016 dönemini kapsar.
 - Bölge geliri ve kirası, ilanların posta kodları üzerinden ilan ağırlıklı ortalamadır. Posta kodu bölgeleri ile mahalle grubu sınırları birebir örtüşmez.
 - 7 ilanın posta kodu boştu. Bu ilanlar fiyat ve doluluk hesaplarına dahil, gelir hesabına dahil değil.
