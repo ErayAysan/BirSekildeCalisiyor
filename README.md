@@ -56,7 +56,7 @@ Ham Airbnb verisini temizleyen staging modeli; diğer bütün modellerin temeli.
 
 ### dim_ev_sahibi (Hakan)
 
-(Hakan dolduracak)
+Seattle Airbnb veri setindeki ev sahiplerine (host) ait benzersiz (unique) kimlik, süper ev sahibi statüsü, yanıt oranları, deneyim yılı ve hesap doğrulama durumu gibi temel özellikleri barındıran boyut (dimension) tablosudur. Olgu (fact) tablolarına analitik bağlam sağlamak amacıyla oluşturulmuştur.
 
 ### fct_ilan_performans (Suden)
 
@@ -140,7 +140,7 @@ Oluşan CSV'ler `dashboard/data/` klasörüne yazılır ve Looker Studio'ya yük
 
 - Veri 2016 yılına aittir; bulgular bugünkü Seattle pazarını birebir yansıtmayabilir.
 - (Herkes kendi modeliyle ilgili maddeyi ekler.)
-- ### 👤 Boyut Tablosu: `dim_ev_sahibi` (Geliştirici: Hakan)
+- ### Boyut Tablosu: `dim_ev_sahibi` (Geliştirici: Hakan)
 Bu tablo, Airbnb veri setindeki ev sahiplerine (host) ait temel özellikleri ve güvenilirlik metriklerini tekilleştirilmiş bir yapıda tutar.
 
 **Temel Özellikler:**
