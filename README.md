@@ -65,7 +65,9 @@ Her satırın bir ilanı temsil ettiği (grain: ilan, 3.818 satır) mart tablosu
 
 ### stg_census_posta_kodu ve mart_mahalle_ozet (Zeynep)
 
-(Zeynep dolduracak)
+`stg_census_posta_kodu`, ABD Nüfus Bürosu'nun 2016 ACS verisini temizler: posta kodu metne çevrilir, Census'un hesaplanamayan değerler için kullandığı negatif kodlar boş değere çevrilir.
+
+`mart_mahalle_ozet`, ilanları bu veriyle posta kodu üzerinden `left join` ile birleştirip mahalle grubu bazında özetler. `left join` sayesinde Census'ta karşılığı olmayan ilanlar kaybolmaz. Özel bir test, özetteki ilan sayıları toplamının kaynak tablodaki 3.818 ilana eşit olduğunu doğrular.
 
 ## Dashboard
 
@@ -83,7 +85,15 @@ Seattle'da 3.818 ilanın ortalama gecelik fiyatı 127,98 USD, kişi başına 41,
 
 ### Ev Sahibi Analizi (Hakan)
 
-(Hakan dolduracak)
+![Ev Sahibi Analizi](dashboard/ekran_goruntuleri/ev_sahibi_analizi.png)
+
+Seattle Airbnb veri setindeki 2.751 ev sahibinin %19,52'si Süper Ev Sahibi, %16,94'ü ise profesyonel ev sahibi statüsündedir. Ev sahiplerinin ortalama deneyim süresi 2,07 yıldır.
+
+Temel Bulgular:
+
+- Süper ev sahibi rozetine sahip olan kullanıcıların genel puan ortalamaları, standart ev sahiplerine kıyasla daha yüksektir.
+- Hızlı yanıt, yüksek doluluk getirir: Misafirlerine "1 saat içinde" yanıt veren ev sahiplerinin doluluk oranları, daha geç yanıt verenlere göre belirgin bir şekilde zirvededir.
+- Ev sahiplerinin deneyim yılları ile aldıkları puanlar arasında doğrudan doğrusal (linear) bir ilişki gözlemlenmiştir.
 
 ### Fiyat ve Doluluk Analizi (Suden)
 
@@ -92,7 +102,7 @@ Tüm ev/daire ilanlarının ortalama gecelik fiyatı (155 USD) özel odaların y
 
 ### Mahalle Analizi (Zeynep)
 
-(Zeynep dolduracak)
+Medyan gecelik fiyatı en yüksek mahalle grupları Downtown (139 USD), Magnolia (129 USD) ve Queen Anne (119 USD); en düşükler Lake City (70 USD), Delridge (72 USD) ve Beacon Hill (75 USD). Dağılım grafiğindeki eğilim çizgisi, bölge geliri arttıkça medyan fiyatın da yükseldiğini gösteriyor, ancak noktalar çizgi etrafında dağınık ve ilişki kesin değil: Downtown'ın bölge medyan geliri ortanın altında olmasına rağmen en pahalı grup. Airbnb/kira oranı en yüksek grup Magnolia (yaklaşık 4); bu grupta yalnızca 61 ilan olduğu için oran oynak olabilir.
 
 ## Veri Sözlüğü ve dbt Docs
 
@@ -153,3 +163,12 @@ Oluşan CSV'ler `dashboard/data/` klasörüne yazılır ve Looker Studio'ya yük
 
 **Kullanım Amacı:**
 Olgu (Fact) tablosu olan `fct_ilan_performans` ile birleştirilerek; "Süper ev sahiplerinin ortalama geliri nedir?" veya "Kimliği doğrulanmış ev sahiplerinin doluluk oranları daha mı yüksektir?" gibi iş sorularına yanıt bulmak için tasarlanmıştır.
+
+### Mahalle Analizi (Geliştirici: Zeynep)
+
+- Census verisi 2016 ACS 5 yıllık tahminidir, 2012–2016 dönemini kapsar.
+- Bölge geliri ve kirası, ilanların posta kodları üzerinden ilan ağırlıklı ortalamadır. Posta kodu bölgeleri ile mahalle grubu sınırları birebir örtüşmez.
+- 7 ilanın posta kodu boştu. Bu ilanlar fiyat ve doluluk hesaplarına dahil, gelir hesabına dahil değil.
+- Doluluk ortalaması takvimi tamamen kapalı ilanları içermez.
+- Airbnb/kira oranı tam dolu bir ay varsayan üst sınırdır.
+- Interbay gibi az ilanı olan mahalle gruplarında (11 ilan) ortalamalar güvenilmez.
