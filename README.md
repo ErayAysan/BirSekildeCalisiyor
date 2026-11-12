@@ -96,7 +96,12 @@ Tüm ev/daire ilanlarının ortalama gecelik fiyatı (155 USD) özel odaların y
 
 ## Veri Sözlüğü ve dbt Docs
 
-(Suden dolduracak)
+Projenin dokümantasyonu iki dosyadan oluşur:
+
+- **`docs/dbt_docs.html`**: dbt'nin koddan otomatik ürettiği etkileşimli dokümantasyon. Modellerin açıklamalarını, sütun tiplerini, testlerini ve veri akış (lineage) diyagramını içerir. Dosyayı indirip tarayıcıda çift tıklayarak açabilirsiniz; internet bağlantısı ya da sunucu gerekmez.
+- **`docs/veri_sozlugu.md`**: Tabloların sütun adlarını, tiplerini ve anlamlarını gösteren okunabilir özet. Her tablonun başında grain'i (her satırın neyi temsil ettiği) ve sahibi yazılıdır.
+
+Modeller değiştiğinde dokümantasyonu yenilemek için `dbt/airbnb_dbt` klasöründe `dbt docs generate --static` komutu çalıştırılır; oluşan `target/static_index.html` dosyası `docs/dbt_docs.html` olarak kopyalanır.
 
 ## Nasıl Çalıştırılır
 
