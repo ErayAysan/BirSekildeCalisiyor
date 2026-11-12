@@ -64,7 +64,9 @@ Ham Airbnb verisini temizleyen staging modeli; diğer bütün modellerin temeli.
 
 ### stg_census_posta_kodu ve mart_mahalle_ozet (Zeynep)
 
-(Zeynep dolduracak)
+`stg_census_posta_kodu`, ABD Nüfus Bürosu'nun 2016 ACS verisini temizler: posta kodu metne çevrilir, Census'un hesaplanamayan değerler için kullandığı negatif kodlar boş değere çevrilir.
+
+`mart_mahalle_ozet`, ilanları bu veriyle posta kodu üzerinden `left join` ile birleştirip mahalle grubu bazında özetler. `left join` sayesinde Census'ta karşılığı olmayan ilanlar kaybolmaz. Özel bir test, özetteki ilan sayıları toplamının kaynak tablodaki 3.818 ilana eşit olduğunu doğrular.
 
 ## Dashboard
 
@@ -97,7 +99,7 @@ Temel Bulgular:
 
 ### Mahalle Analizi (Zeynep)
 
-(Zeynep dolduracak)
+Medyan gecelik fiyatı en yüksek mahalle grupları Downtown (139 USD), Magnolia (129 USD) ve Queen Anne (119 USD); en düşükler Lake City (70 USD), Delridge (72 USD) ve Beacon Hill (75 USD). Dağılım grafiğindeki eğilim çizgisi, bölge geliri arttıkça medyan fiyatın da yükseldiğini gösteriyor, ancak noktalar çizgi etrafında dağınık ve ilişki kesin değil: Downtown'ın bölge medyan geliri ortanın altında olmasına rağmen en pahalı grup. Airbnb/kira oranı en yüksek grup Magnolia (yaklaşık 4); bu grupta yalnızca 61 ilan olduğu için oran oynak olabilir.
 
 ## Veri Sözlüğü ve dbt Docs
 
@@ -149,3 +151,10 @@ Bu tablo, Airbnb veri setindeki ev sahiplerine (host) ait temel özellikleri ve 
 **Kullanım Amacı:** 
 Olgu (Fact) tablosu olan `fct_ilan_performans` ile birleştirilerek; "Süper ev sahiplerinin ortalama geliri nedir?" veya "Kimliği doğrulanmış ev sahiplerinin doluluk oranları daha mı yüksektir?" gibi iş sorularına yanıt bulmak için tasarlanmıştır.
 
+### Mahalle Analizi (Geliştirici: Zeynep)
+- Census verisi 2016 ACS 5 yıllık tahminidir, 2012–2016 dönemini kapsar.
+- Bölge geliri ve kirası, ilanların posta kodları üzerinden ilan ağırlıklı ortalamadır. Posta kodu bölgeleri ile mahalle grubu sınırları birebir örtüşmez.
+- 7 ilanın posta kodu boştu. Bu ilanlar fiyat ve doluluk hesaplarına dahil, gelir hesabına dahil değil.
+- Doluluk ortalaması takvimi tamamen kapalı ilanları içermez.
+- Airbnb/kira oranı tam dolu bir ay varsayan üst sınırdır.
+- Interbay gibi az ilanı olan mahalle gruplarında (11 ilan) ortalamalar güvenilmez.
