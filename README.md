@@ -77,6 +77,8 @@ Ekipte Mac kullanan üye olduğu ve Power BI Desktop yalnızca Windows'ta çalı
 
 Rapor dört sayfadan oluşur. Üstteki mahalle grubu, oda tipi ve mülk tipi filtreleri tüm sayfalarda geçerlidir.
 
+Looker Studio linki açılmazsa raporun PDF sürümü: [airbnb_dashboard.pdf](dashboard/airbnb_dashboard.pdf)
+
 ### Genel Bakış (Eray)
 
 ![Genel Bakış](dashboard/ekran_goruntuleri/genel_bakis.png)
