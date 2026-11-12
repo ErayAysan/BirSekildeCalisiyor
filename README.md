@@ -87,6 +87,7 @@ Ham Airbnb verisini temizleyen staging modeli; diğer bütün modellerin temeli.
 ### Mahalle Analizi (Zeynep)
 
 Medyan gecelik fiyatı en yüksek mahalle grupları Downtown (139 USD), Magnolia (129 USD) ve Queen Anne (119 USD); en düşükler Lake City (70 USD), Delridge (72 USD) ve Beacon Hill (75 USD). Dağılım grafiğindeki eğilim çizgisi, bölge geliri arttıkça medyan fiyatın da yükseldiğini gösteriyor, ancak noktalar çizgi etrafında dağınık ve ilişki kesin değil: Downtown'ın bölge medyan geliri ortanın altında olmasına rağmen en pahalı grup. Airbnb/kira oranı en yüksek grup Magnolia (yaklaşık 4); bu grupta yalnızca 61 ilan olduğu için oran oynak olabilir.
+![Mahalle sayfası](dashboard/ekran_goruntuleri/mahalle_analizi.png)
 
 ## Veri Sözlüğü ve dbt Docs
 
